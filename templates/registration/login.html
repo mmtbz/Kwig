@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>KwigA - Login</title>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <script type="javascript" src="{% static 'js/jquery-3.2.0.min.js' %}"></script>
+    <script type="javascript">
+        $('.message a').click(function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+    </script>
+
+</head>
+
+<body>
+
+  <div class="login-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+
+    <form class="login-form" action="{% url 'login' %}" method="post">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% else %}
+            <p>Please, use the following form to log-in:</p>
+        {% endif %}
+        {% csrf_token %}
+        {{ form }}
+        <input id="button" type="submit" value="login">
+        <!--
+
+        <input type="text" placeholder="username"/>
+        <input type="password" placeholder="password"/>
+        <button>login</button> -->
+        <input type="hidden" name="next" value="{{ next }}" />
+
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+
+<script type="javascript">
+        $('.message a').click(function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+    </script>
+
+</body>
+
+</html>
